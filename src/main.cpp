@@ -1,53 +1,61 @@
-//calibrate_uno.ino
-#include <Arduino.h>            // Arduino Framework
+#include <Arduino.h>
 
-/*
-  Soil Moisture Sensor Calibration
-  soil_calibrate_uno.ino
-  Gets raw reading from soil sensor and displays on Serial Monitor
-  Use to establish minuimum and maximum values
-  Works with Capacitive and Resistive Sensors
-  Uses Arduino Uno
- 
-  DroneBot Workshop 2022
-  https://dronebotworkshop.com
-*/
+int IN1 = 2;//pin for pumps
+//int IN2 = 3;
+//int IN3 = 4;
+//int IN4 = 5;
 
-// Variable for sensor value
-int sensorval;
-int highnumber;
-int lownumber;
+int Pin1 = A0; //analong read pin for moisture sensor
+//int Pin2 = A1;
+//int Pin3 = A2;
+//int Pin4 = A3;
+// Sensor constants - replace with values from calibration sketch
+// Constant for dry sensor
+const int DryValue = 592;
+// Constant for wet sensor
+const int WetValue = 299;
+// Variables for soil moisture
+int soilMoistureValue;
+int soilMoisturePercent;
 // Analog input port
-#define SENSOR_IN A0
 
-
+float value1 = 0;
+//float value2 = 0;
+//float value3 = 0;
+//float value4 = 0;
+int debounce = 0;
 void setup() {
-// Open Serial Monitor
-Serial.begin(9600);
-// Set ADC to use 3.3-volt AREF input
-//analogReference(EXTERNAL);
-highnumber = analogRead(SENSOR_IN);
-lownumber = analogRead(SENSOR_IN);
+  Serial.begin(9600);
+  pinMode(IN1, OUTPUT);
 
+  pinMode(Pin1, INPUT);
+  digitalWrite(IN1, HIGH);
+ 
+  delay(500);
 }
 void loop() {
 
-// Read sensor value
-sensorval = analogRead(SENSOR_IN);
-if (lownumber = 0) {lownumber = sensorval;}
+  Serial.print("MOISTURE LEVEL:");
+  value1 = analogRead(Pin1);
+  Serial.println(value1);
+  if(value1>500)
+  { if (debounce > 20){
+      digitalWrite(IN1, LOW);
+      Serial.println("pump on:");
+      debounce = 0;
+  }
+  else debounce=debounce +1;
+  }
+  else
+  {
+    digitalWrite(IN1, HIGH);
+     Serial.println("pump off:");
+      debounce = 0;
 
-if (sensorval != 0){
-    if (highnumber > sensorval){(highnumber = sensorval);}
-    else if (lownumber < sensorval){(lownumber = sensorval);}
-    
-    {
-        /* code */
-    }
-    ;}
-// Print to Serial Monitor
-Serial.println(sensorval);
-Serial.println(highnumber);
-Serial.println(lownumber);
+    };
+  
 
-delay(100);
+
+    Serial.println(debounce);
+  delay(1000);
 }
