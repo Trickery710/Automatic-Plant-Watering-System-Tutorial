@@ -1,29 +1,45 @@
 //calibrate_uno.ino
 #include <Arduino.h>            // Arduino Framework
 
-/*
-  Soil Moisture Sensor Calibration
-  soil_calibrate_uno.ino
-  Gets raw reading from soil sensor and displays on Serial Monitor
-  Use to establish minuimum and maximum values
-  Works with Capacitive and Resistive Sensors
-  Uses Arduino Uno
- 
-  DroneBot Workshop 2022
-  https://dronebotworkshop.com
-*/
 
-// Variable for sensor value
+int Pin1 = A0; //analong read pin for moisture sensor
+//int Pin2 = A1;
+//int Pin3 = A2;
+//int Pin4 = A3;
+// Sensor constants - replace with values from calibration sketch
+// Constant for dry sensor
+const int DryValue = 592;
+// Constant for wet sensor
+const int WetValue = 289;
+// Variables for soil moisture
+int soilMoistureValue;
+int soilMoisturePercent;
+// Analog input port
 
 // Analog input port
 #define SENSOR_IN A0
+
+int debounce = 0;
+
+
+
+//moisture sensor
+void initMoistOne() {
+    pinMode(Pin1, INPUT);
+ delay(500);
+ }
+
+
+
+/* tried to make a class
 class MyMoist {       // The class
   public:             // Access specifier
     int sensorval;
     int highnumber;
     int lownumber;        // Attribute (int variable)
 };
-
+*/
+/*
 void setup() {
     MyMoist moist1;
     moist1.sensorval = analogRead(SENSOR_IN);
@@ -31,6 +47,8 @@ void setup() {
     moist1.highnumber = analogRead(SENSOR_IN);
 
 };
+*/
+/*
 void loop() {
 
 // Read sensor value
@@ -41,7 +59,7 @@ if (sensorval != 0){
     else if (lownumber < sensorval){(lownumber = sensorval);}
     
     {
-        /* code */
+        
     }
     ;};
 // Print to Serial Monitor
@@ -51,3 +69,4 @@ Serial.println(lownumber);
 
 delay(100);
 }
+*/
