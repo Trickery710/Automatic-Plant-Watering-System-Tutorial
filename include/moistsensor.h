@@ -17,7 +17,6 @@ int soilMoisturePercent;
 // Analog input port
 
 // Analog input port
-#define SENSOR_IN A0
 
 int debounce = 0;
 
@@ -47,26 +46,4 @@ void setup() {
     moist1.highnumber = analogRead(SENSOR_IN);
 
 };
-*/
-/*
-void loop() {
-
-// Read sensor value
-if (moist1.lownumber = 0) {moist1.lownumber = moist1.sensorval;}
-
-if (sensorval != 0){
-    if (highnumber > sensorval){(highnumber = sensorval);}
-    else if (lownumber < sensorval){(lownumber = sensorval);}
-    
-    {
-        
-    }
-    ;};
-// Print to Serial Monitor
-Serial.println(sensorval);
-Serial.println(highnumber);
-Serial.println(lownumber);
-
-delay(100);
-}
 */
